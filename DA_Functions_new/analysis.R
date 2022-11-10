@@ -59,7 +59,7 @@ analysis <- function(A, s, obs, i, nrobs, obsop,
         if (err_type_obs[!is.na(err_type_obs[,i]),i][j] == 0) {
             E[j,] <- rnorm(s$nrens, mean=0, sd=err_var_obs[!is.na(err_var_obs[,i]), i][j])
         } else {
-            E[j,] <- rnorm(s$nrens, mean=obs[i,!is.na(obs[i,])][j], 
+            E[j,] <- rnorm(s$nrens, mean=0, 
                            sd=abs(obs[i,!is.na(obs[i,])][j] * err_var_obs[!is.na(err_var_obs[,i]), i][j])) 
         }
     }
@@ -70,8 +70,8 @@ analysis <- function(A, s, obs, i, nrobs, obsop,
     for (j in 1:nrobs[i]) {
         for (k in 1:s$nrens) {
             ## Add the observation uncertainty to observation (eqn 48 Evenson 2003) before taking HA away from it */
-            #D[j,k] <- E[j,k] + obs[i,!is.na(obs[i,])][j] - HA[j,k]
-            D[j,k] <- obs[i,!is.na(obs[i,])][j] - HA[j,k]
+            D[j,k] <- E[j,k] + obs[i,!is.na(obs[i,])][j] - HA[j,k]
+            #D[j,k] <- obs[i,!is.na(obs[i,])][j] - HA[j,k]
         }
     }
     D_mean <- rowMeans(D, na.rm=T)
