@@ -59,7 +59,7 @@ analysis <- function(A, s, obs, i, nrobs, obsop,
         if (err_type_obs[!is.na(err_type_obs[,i]),i][j] == 0) {
             E[j,] <- rnorm(s$nrens, mean=0, sd=err_var_obs[!is.na(err_var_obs[,i]), i][j])
         } else {
-            E[j,] <- rnorm(s$nrens, mean=obs[i,!is.na(obs[i,])][j], 
+            E[j,] <- rnorm(s$nrens, mean=0, 
                            sd=abs(obs[i,!is.na(obs[i,])][j] * err_var_obs[!is.na(err_var_obs[,i]), i][j])) 
         }
     }
